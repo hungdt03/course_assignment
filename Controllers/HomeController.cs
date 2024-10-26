@@ -18,7 +18,7 @@ namespace test_course.Controllers
         public async Task<IActionResult> Index(int? khoaHocId)
         {
             var khoahocs = await context.KhoaHoc.ToListAsync();
-            if (khoaHocId == null)
+            if (khoaHocId == null && khoahocs.Count > 0)
             {
                 khoaHocId = khoahocs[0].Id;
             }
