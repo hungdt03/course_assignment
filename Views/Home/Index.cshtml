@@ -1,0 +1,53 @@
+﻿@model test_course.ViewModels.KhoaHocViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div id="container">
+    <div class="subject-wrapper">
+        <h1 class="subject-header">Khóa học: Front End</h1>
+        <div class="subject-list">
+            <div class="column">
+                @{
+                    var count = 1;
+                    var itemsPerCol = (int)Math.Ceiling(Model.MonHocs.Count() / 2.0);
+                }
+                <div class="d-flex flex-column">
+                    @foreach (var khoahoc in Model.MonHocs.Take(itemsPerCol))
+                    {
+                        <span>@count. @khoahoc.TenMonHoc</span>
+                        count++;
+                    }
+                </div>
+            </div>
+
+            @if (Model.MonHocs.Count > 1)
+            {
+                <div class="divider"></div>
+            }
+            
+            <div class="column">
+                <div class="d-flex flex-column">
+                    @foreach (var khoahoc in Model.MonHocs.Skip(itemsPerCol))
+                    {
+                        <span>@count. @khoahoc.TenMonHoc</span>
+                        count++;
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="divider-content"></div>
+    <div class="course-wrapper">
+        <h1 class="course-header">Khóa học</h1>
+        <ul class="course-list">
+            @foreach (var khoahoc in Model.KhoaHocs)
+            {
+                <li>
+                    <a href="/?khoahocId=@khoahoc.Id">@khoahoc.TenKhoaHoc</a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
